@@ -23,6 +23,15 @@ MyTools class >> loadDebuggerSelector [
 ]
 
 { #category : #load }
+MyTools class >> loadNewTools [
+	<script>
+    Metacello new
+    	baseline: 'NewTools';
+    	repository: 'github://pharo-spec/NewTools';
+    	load.
+]
+
+{ #category : #load }
 MyTools class >> loadSindarin [
 	<script>
 	Metacello new
