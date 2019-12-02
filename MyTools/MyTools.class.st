@@ -1,0 +1,32 @@
+Class {
+	#name : #MyTools,
+	#superclass : #Object,
+	#category : #MyTools
+}
+
+{ #category : #load }
+MyTools class >> loadChest [
+	<script>
+	Metacello new
+    	baseline: 'Chest';
+    	repository: 'github://dupriezt/Chest';
+    	load.
+]
+
+{ #category : #load }
+MyTools class >> loadDebuggerSelector [
+	<script>
+	Metacello new
+   		baseline: 'DebuggerSelector';
+   		repository: 'github://dupriezt/DebuggerSelector';
+   		load.
+]
+
+{ #category : #load }
+MyTools class >> loadSindarin [
+	<script>
+	Metacello new
+    baseline: 'Sindarin';
+    repository: 'github://dupriezt/ScriptableDebugger';
+    load.
+]
