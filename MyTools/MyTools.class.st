@@ -49,6 +49,16 @@ MyTools class >> loadDebuggerSelector [
 ]
 
 { #category : #load }
+MyTools class >> loadInformantNetwork [
+	<script>
+	<name: 'Load Informant Network'>
+	Metacello new
+    baseline: 'InformantNetwork';
+    repository: 'github://dupriezt/InformantNetwork';
+    load.
+]
+
+{ #category : #load }
 MyTools class >> loadNewTools [
 	<script>
 	<name: 'Load NewTools'>
