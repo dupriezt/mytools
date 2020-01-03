@@ -4,9 +4,34 @@ Class {
 	#category : #MyTools
 }
 
+{ #category : #'world menu' }
+MyTools class >> buildMenuItemsOn: aBuilder [ 
+	| cat |
+	cat := #load.
+	(self methodsIn: cat asLowercase)
+		do: [ :method | 
+			(aBuilder item: ((method pragmaAt: #name:) argumentAt: 1))
+				parent: 'MyTools';
+				action: [ self execute: method selector ];
+				iconName: #smallDoIt ]
+]
+
+{ #category : #'world menu' }
+MyTools class >> execute: aSelector [
+	[ self perform: aSelector.
+	self inform: 'Executed with success: ' , aSelector ]
+		on: Error
+		do: [ :ex | 
+			self
+				inform:
+					'Error during execution.
+' , ex asString ]
+]
+
 { #category : #load }
 MyTools class >> loadChest [
 	<script>
+	<name: 'Load Chest'>
 	Metacello new
     	baseline: 'Chest';
     	repository: 'github://dupriezt/Chest';
@@ -16,6 +41,7 @@ MyTools class >> loadChest [
 { #category : #load }
 MyTools class >> loadDebuggerSelector [
 	<script>
+	<name: 'Load DebuggerSelector'>
 	Metacello new
    		baseline: 'DebuggerSelector';
    		repository: 'github://dupriezt/DebuggerSelector';
@@ -25,6 +51,7 @@ MyTools class >> loadDebuggerSelector [
 { #category : #load }
 MyTools class >> loadNewTools [
 	<script>
+	<name: 'Load NewTools'>
     Metacello new
     	baseline: 'NewTools';
     	repository: 'github://pharo-spec/NewTools';
@@ -34,6 +61,7 @@ MyTools class >> loadNewTools [
 { #category : #load }
 MyTools class >> loadSindarin [
 	<script>
+	<name: 'Load Sindarin'>
 	Metacello new
     baseline: 'Sindarin';
     repository: 'github://dupriezt/ScriptableDebugger';
@@ -43,6 +71,7 @@ MyTools class >> loadSindarin [
 { #category : #load }
 MyTools class >> loadSpecProperly [
 	<script>
+	<name: 'Load Spec Properly'>
     Metacello new
         githubUser: 'pharo-spec' project: 'Spec' commitish: 'master' path: 'src';
         baseline: 'Spec2';
@@ -50,4 +79,18 @@ MyTools class >> loadSpecProperly [
         onUpgrade: [ :e | e useIncoming ];
         ignoreImage;
         load
+]
+
+{ #category : #'world menu' }
+MyTools class >> methodsIn: aProtocol [
+	^ (self class methods select: [ :method | method protocol = aProtocol ]) sort: #selector ascending
+]
+
+{ #category : #'world menu' }
+MyTools class >> worldMenu: aBuilder [
+	<worldMenu>
+	aBuilder item: 'MyTools';
+		order: 20;
+		iconName: #smallDoIt;
+		with: [ self buildMenuItemsOn: aBuilder ].
 ]
