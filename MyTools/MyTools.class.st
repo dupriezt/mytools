@@ -79,6 +79,16 @@ MyTools class >> loadSindarin [
 ]
 
 { #category : #load }
+MyTools class >> loadSpecAppSkeleton [
+	<script>
+	<name: 'Load SpecAppSkeleton'>
+	Metacello new
+    	baseline: 'SpecAppSkeleton';
+    	repository: 'github://dupriezt/SpecAppSkeleton';
+    	load.
+]
+
+{ #category : #load }
 MyTools class >> loadSpecProperly [
 	<script>
 	<name: 'Load Spec Properly'>
@@ -98,6 +108,7 @@ MyTools class >> methodsIn: aProtocol [
 
 { #category : #'world menu' }
 MyTools class >> worldMenu: aBuilder [
+	"Save this method to trigger a rebuild of the worldmenu in the top bar"
 	<worldMenu>
 	aBuilder item: 'MyTools';
 		order: 20;
