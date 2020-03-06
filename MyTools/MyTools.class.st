@@ -69,6 +69,16 @@ MyTools class >> loadNewTools [
 ]
 
 { #category : #load }
+MyTools class >> loadSampleExecution [
+	<script>
+	<name: 'Load SampleExecution'>
+	Metacello new
+    	baseline: 'SampleExecution';
+    	repository: 'github://dupriezt/SampleExecution';
+    	load.
+]
+
+{ #category : #load }
 MyTools class >> loadSindarin [
 	<script>
 	<name: 'Load Sindarin'>
