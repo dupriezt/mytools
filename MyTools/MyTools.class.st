@@ -6,14 +6,32 @@ Class {
 
 { #category : #'world menu' }
 MyTools class >> buildMenuItemsOn: aBuilder [ 
-	| cat |
-	cat := #load.
-	(self methodsIn: cat asLowercase)
+	| cat protocolList parent |
+"	cat := #root."
+	protocolList := { #root. #'echo debugging' }.
+	protocolList do: [ :protocol |
+		parent := 'MyTools'.
+		(protocol ~= #root) ifTrue: [
+			parent := protocol asString.
+			aBuilder item: protocol asString;
+				order: 20;
+				iconName: #glamorousFolder;
+				with: [].	
+		].
+		(self methodsIn: protocol asLowercase)
+		do: [ :method | 
+			(aBuilder item: ((method pragmaAt: #name:) argumentAt: 1))
+				parent: parent;
+				action: [ self execute: method selector ];
+				iconName: #smallDoIt ]
+		
+	]
+	"(self methodsIn: cat asLowercase)
 		do: [ :method | 
 			(aBuilder item: ((method pragmaAt: #name:) argumentAt: 1))
 				parent: 'MyTools';
 				action: [ self execute: method selector ];
-				iconName: #smallDoIt ]
+				iconName: #smallDoIt ]"
 ]
 
 { #category : #'world menu' }
@@ -28,7 +46,7 @@ MyTools class >> execute: aSelector [
 ' , ex asString ]
 ]
 
-{ #category : #load }
+{ #category : #root }
 MyTools class >> loadChest [
 	<script>
 	<name: 'Load Chest'>
@@ -38,7 +56,17 @@ MyTools class >> loadChest [
     	load.
 ]
 
-{ #category : #load }
+{ #category : #'echo debugging' }
+MyTools class >> loadDebuggerCommunication [
+	<script>
+	<name: 'Load DebuggerCommunication'>
+	Metacello new
+    baseline: 'DebuggerCommunication';
+    repository: 'github://dupriezt/DebuggerCommunication';
+    load.
+]
+
+{ #category : #root }
 MyTools class >> loadDebuggerSelector [
 	<script>
 	<name: 'Load DebuggerSelector'>
@@ -48,7 +76,7 @@ MyTools class >> loadDebuggerSelector [
    		load.
 ]
 
-{ #category : #load }
+{ #category : #root }
 MyTools class >> loadInformantNetwork [
 	<script>
 	<name: 'Load Informant Network'>
@@ -58,7 +86,7 @@ MyTools class >> loadInformantNetwork [
     load.
 ]
 
-{ #category : #load }
+{ #category : #root }
 MyTools class >> loadNewTools [
 	<script>
 	<name: 'Load NewTools'>
@@ -68,7 +96,27 @@ MyTools class >> loadNewTools [
     	load.
 ]
 
-{ #category : #load }
+{ #category : #'echo debugging' }
+MyTools class >> loadPillarConfigBugFailing [
+	<script>
+	<name: 'Load PillarConfigBug_Failing'>
+	Metacello new
+    baseline: 'PillarConfigBug_Failing';
+    repository: 'github://dupriezt/PillarConfigBug_Failing';
+    load.
+]
+
+{ #category : #'echo debugging' }
+MyTools class >> loadPillarConfigBugWorking [
+	<script>
+	<name: 'Load PillarConfigBug_Working'>
+	Metacello new
+    baseline: 'PillarConfigBug_Working';
+    repository: 'github://dupriezt/PillarConfigBug_Working';
+    load.
+]
+
+{ #category : #root }
 MyTools class >> loadSampleExecution [
 	<script>
 	<name: 'Load SampleExecution'>
@@ -78,7 +126,7 @@ MyTools class >> loadSampleExecution [
     	load.
 ]
 
-{ #category : #load }
+{ #category : #root }
 MyTools class >> loadSindarin [
 	<script>
 	<name: 'Load Sindarin'>
@@ -88,7 +136,7 @@ MyTools class >> loadSindarin [
     load.
 ]
 
-{ #category : #load }
+{ #category : #root }
 MyTools class >> loadSpecAppSkeleton [
 	<script>
 	<name: 'Load SpecAppSkeleton'>
@@ -98,7 +146,7 @@ MyTools class >> loadSpecAppSkeleton [
     	load.
 ]
 
-{ #category : #load }
+{ #category : #root }
 MyTools class >> loadSpecProperly [
 	<script>
 	<name: 'Load Spec Properly'>
@@ -114,6 +162,12 @@ MyTools class >> loadSpecProperly [
 { #category : #'world menu' }
 MyTools class >> methodsIn: aProtocol [
 	^ (self class methods select: [ :method | method protocol = aProtocol ]) sort: #selector ascending
+]
+
+{ #category : #'world menu' }
+MyTools class >> refreshTopMenuBar [
+	<script>
+	self inform: 'Save the MyTools class>>#worldMenu: method to trigger a rebuild of the world menu in the top bar'.
 ]
 
 { #category : #'world menu' }
