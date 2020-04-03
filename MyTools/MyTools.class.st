@@ -77,6 +77,16 @@ MyTools class >> loadDebuggerSelector [
 ]
 
 { #category : #root }
+MyTools class >> loadGloVar [
+	<script>
+	<name: 'Load GloVar'>
+	Metacello new
+	    baseline: 'DebuggerCommunication';
+	    repository: 'github://dupriezt/DebuggerCommunication';
+	    load.
+]
+
+{ #category : #root }
 MyTools class >> loadInformantNetwork [
 	<script>
 	<name: 'Load Informant Network'>
