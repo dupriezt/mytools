@@ -81,8 +81,8 @@ MyTools class >> loadGloVar [
 	<script>
 	<name: 'Load GloVar'>
 	Metacello new
-	    baseline: 'DebuggerCommunication';
-	    repository: 'github://dupriezt/DebuggerCommunication';
+	    baseline: 'GloVar';
+	    repository: 'github://dupriezt/GloVar';
 	    load.
 ]
 
