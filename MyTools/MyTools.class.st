@@ -104,6 +104,8 @@ MyTools class >> loadMyPack [
     baseline: 'MyPack';
     repository: 'github://dupriezt/MyPack';
     load.
+	MyClass browse.
+	
 ]
 
 { #category : #root }
