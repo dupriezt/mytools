@@ -97,6 +97,16 @@ MyTools class >> loadInformantNetwork [
 ]
 
 { #category : #root }
+MyTools class >> loadMyPack [
+	<script>
+	<name: 'Load MyPack (dummy code)'>
+	Metacello new
+    baseline: 'MyPack';
+    repository: 'github://dupriezt/MyPack';
+    load.
+]
+
+{ #category : #root }
 MyTools class >> loadNewTools [
 	<script>
 	<name: 'Load NewTools'>
