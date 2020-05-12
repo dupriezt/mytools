@@ -77,6 +77,18 @@ MyTools class >> loadDebuggerSelector [
 ]
 
 { #category : #root }
+MyTools class >> loadEventGenerator [
+	<script>
+	<name: 'Load EventGenerator'>
+	Metacello new
+    baseline: 'EventGenerator';
+    repository: 'github://dupriezt/EventGenerator';
+    load.
+	EventGenerator browse.
+	
+]
+
+{ #category : #root }
 MyTools class >> loadGloVar [
 	<script>
 	<name: 'Load GloVar'>
