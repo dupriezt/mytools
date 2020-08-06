@@ -178,6 +178,7 @@ MyTools class >> loadSpecAppSkeleton [
     	baseline: 'SpecAppSkeleton';
     	repository: 'github://dupriezt/SpecAppSkeleton';
     	load.
+	SpecAppSkeleton browse
 ]
 
 { #category : #root }
