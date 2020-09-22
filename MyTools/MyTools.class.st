@@ -34,6 +34,13 @@ MyTools class >> buildMenuItemsOn: aBuilder [
 				iconName: #smallDoIt ]"
 ]
 
+{ #category : #root }
+MyTools class >> createBaseline [ 
+	<script>
+	<name: 'Create Baseline'>
+	BaselineCreator createBaseline
+]
+
 { #category : #'world menu' }
 MyTools class >> execute: aSelector [
 	[ self perform: aSelector.
