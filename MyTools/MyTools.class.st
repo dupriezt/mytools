@@ -116,6 +116,16 @@ MyTools class >> loadInformantNetwork [
 ]
 
 { #category : #root }
+MyTools class >> loadInquisitor [
+	<script>
+	<name: 'Load Inquisitor'>
+	Metacello new
+    baseline: 'Inquisitor';
+    repository: 'github://dupriezt/inquisitor';
+    load.
+]
+
+{ #category : #root }
 MyTools class >> loadMyPack [
 	<script>
 	<name: 'Load MyPack (dummy code)'>
