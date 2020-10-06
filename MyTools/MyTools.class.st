@@ -222,6 +222,15 @@ MyTools class >> refreshTopMenuBar [
 	self inform: 'Save the MyTools class>>#worldMenu: method to trigger a rebuild of the world menu in the top bar'.
 ]
 
+{ #category : #root }
+MyTools class >> showIcons [
+	<script>
+	<name: 'Show Icons'>
+	Smalltalk ui icons inspect.
+	self inform: 'Smalltalk ui icons inspect.
+	Smalltalk ui iconNamed: #glamorousOk'
+]
+
 { #category : #'world menu' }
 MyTools class >> worldMenu: aBuilder [
 	"Save this method to trigger a rebuild of the worldmenu in the top bar"
