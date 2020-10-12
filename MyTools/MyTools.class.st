@@ -237,6 +237,6 @@ MyTools class >> worldMenu: aBuilder [
 	<worldMenu>
 	aBuilder item: 'MyTools';
 		order: 20;
-		iconName: #smallDoIt;
+		iconName: #bitbucket;
 		with: [ self buildMenuItemsOn: aBuilder ].
 ]
