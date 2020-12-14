@@ -1003,10 +1003,12 @@ MyTools class >> showIcons [
 { #category : #adding }
 MyTools class >> stDebuggerAddColourToStack: aSpTablePresenter [
 	| pharoPackageColour nonPharoPackageColour |
+	"Colour used if the package appears in #pharoPackagesNameList, and the selector is not DoIt"
 	pharoPackageColour := Color veryVeryLightGray.
+	"Colour used if the package does not appear in #pharoPackagesNameList, or the selector if DoIt"
 	nonPharoPackageColour := Color paleGreen.
 	(aSpTablePresenter columns detect: [ :col | col title = 'Package']) displayBackgroundColor: [ :ctx |
-		(self pharoPackagesNameList includes: (ctx method methodClass package name asString)) ifTrue: [ pharoPackageColour ] ifFalse: [nonPharoPackageColour].].
+		((self pharoPackagesNameList includes: (ctx method methodClass package name asString)) and: [ ctx method selector ~= #DoIt ]) ifTrue: [ pharoPackageColour ] ifFalse: [nonPharoPackageColour].].
 ]
 
 { #category : #root }
