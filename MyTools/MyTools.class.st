@@ -65,8 +65,8 @@ MyTools class >> getInstructionsForVisualStudioCode [
 2) Open Visual Studio Code
 3) ctrl-shift-P, Open Settings (JSON)
 4) Copy paste:
-    "pharo.pathToImage": "', SmalltalkImage current imagePath asString, '",
-    "pharo.pathToVM": "', SmalltalkImage current vm fullPath asString, '",
+    "pharo.pathToImage": "', (SmalltalkImage current imagePath asString copyReplaceAll: '\' with: '\\'), '",
+    "pharo.pathToVM": "', (SmalltalkImage current vm fullPath asString copyReplaceAll: '\' with: '\\'), '",
 5) Save and quit this image
 6) In PharoLauncher, right-click on this image, Show in folder
 7) Navigate to pharo-local/iceberg/
