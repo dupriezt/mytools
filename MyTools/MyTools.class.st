@@ -11,7 +11,7 @@ Class {
 MyTools class >> buildMenuItemsOn: aBuilder [ 
 	| cat protocolList parent |
 "	cat := #root."
-	protocolList := { #root. #'echo debugging'. #load. #workaround }.
+	protocolList := { #root. #'echo debugging'. #load. #workaround. #'pharo language server' }.
 	protocolList do: [ :protocol |
 		parent := 'MyTools'.
 		(protocol ~= #root) ifTrue: [
@@ -54,6 +54,23 @@ MyTools class >> execute: aSelector [
 				inform:
 					'Error during execution.
 ' , ex asString ]
+]
+
+{ #category : #'pharo language server' }
+MyTools class >> getInstructionsForVisualStudioCode [
+
+	<script>
+	<name: 'Get instructions'>
+('1) Load the Pharo Language Server in this image
+2) Open Visual Studio Code
+3) ctrl-shift-P, Open Settings (JSON)
+4) Copy paste:
+    "pharo.pathToImage": "', SmalltalkImage current imagePath asString, '",
+    "pharo.pathToVM": "', SmalltalkImage current vm fullPath asString, '",
+5) Save and quit this image
+6) In PharoLauncher, right-click on this image, Show in folder
+7) Navigate to pharo-local/iceberg/
+8) Drag and drop the iceberg repositories you want to edit onto Visual Studio code') inspect
 ]
 
 { #category : #load }
@@ -148,6 +165,17 @@ MyTools class >> loadNewTools [
     	baseline: 'NewTools';
     	repository: 'github://pharo-spec/NewTools';
     	load.
+]
+
+{ #category : #'pharo language server' }
+MyTools class >> loadPharoLanguageServer [
+
+	<script>
+	<name: 'Load PharoLanguageServer'>
+	Metacello new
+		githubUser: 'badetitou' project: 'Pharo-LanguageServer' commitish: 'v1.0.0' path: 'src';
+		baseline: 'PharoLanguageServer';
+		load
 ]
 
 { #category : #'echo debugging' }
