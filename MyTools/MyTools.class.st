@@ -1124,7 +1124,8 @@ MyTools class >> workaroundHomeKeyDoesNotWork [
 
 	<script>
 	<name: 'Workaround: Home key does not work'>
-	OSKeySymbols class compile: '^ #(
+	OSKeySymbols class compile: 'data
+	^ #(
 		(16r0000 OSK_UNKNOWN null)
 		(16r000D OSK_RETURN return)
 		(16r001B OSK_ESCAPE escape)
