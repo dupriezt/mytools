@@ -158,6 +158,16 @@ MyTools class >> loadMyPack [
 ]
 
 { #category : #load }
+MyTools class >> loadMyPharoFork [
+	<script>
+	<name: 'Load My Pharo Fork'>
+	Metacello new
+    baseline: 'Pharo';
+    repository: 'github://dupriezt/pharo';
+    load.
+]
+
+{ #category : #load }
 MyTools class >> loadNewTools [
 	<script>
 	<name: 'Load NewTools'>
