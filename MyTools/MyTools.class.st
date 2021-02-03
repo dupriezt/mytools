@@ -1381,7 +1381,7 @@ MyTools class >> worldMenu: aBuilder [
 	"Save this method to trigger a rebuild of the worldmenu in the top bar"
 	<worldMenu>
 	aBuilder item: 'MyTools';
-		order: 20;
+		order: 150;
 		iconName: #bitbucket;
 		with: [ self buildMenuItemsOn: aBuilder ].
 ]
