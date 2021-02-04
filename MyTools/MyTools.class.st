@@ -169,10 +169,25 @@ MyTools class >> loadMyPack [
 MyTools class >> loadMyPharoFork [
 	<script>
 	<name: 'Load My Pharo Fork'>
-	Metacello new
-    baseline: 'Pharo';
-    repository: 'github://dupriezt/pharo';
-    load.
+	| pubKeyFile prvKeyFile branchName remote location repo |
+	pubKeyFile := '/Users/ishalya/.ssh/id_rsa.pub'.
+	prvKeyFile := '/Users/ishalya/.ssh/id_rsa'.
+
+	IceCredentialsProvider sshCredentials
+	  publicKey: pubKeyFile;
+	  privateKey: prvKeyFile.
+
+	branchName := 'Pharo9.0'.
+	remote := IceGitRemote url: 'https://github.com/dupriezt/pharo'.
+	location := FileLocator localDirectory / 'iceberg' / remote projectName.
+	repo := IceRepositoryCreator new
+		remote: remote;
+		location: location;
+		createRepository.
+	self inform: 'Registering repository ...'.
+	repo register.
+	self inform: 'Checking out ...' , branchName.
+		repo checkoutBranch: branchName.
 ]
 
 { #category : #load }
