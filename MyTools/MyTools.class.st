@@ -11,7 +11,7 @@ Class {
 MyTools class >> buildMenuItemsOn: aBuilder [ 
 	| cat protocolList parent |
 "	cat := #root."
-	protocolList := { #root. #'echo debugging'. #load. #workaround. #'pharo language server' }.
+	protocolList := { #root. #'echo debugging'. #load. #workaround. #'pharo language server'. #help }.
 	protocolList do: [ :protocol |
 		parent := 'MyTools'.
 		(protocol ~= #root) ifTrue: [
@@ -71,6 +71,14 @@ MyTools class >> getInstructionsForVisualStudioCode [
 6) In PharoLauncher, right-click on this image, Show in folder
 7) Navigate to pharo-local/iceberg/
 8) Drag and drop the iceberg repositories you want to edit onto Visual Studio code') inspect
+]
+
+{ #category : #help }
+MyTools class >> helpUseStream [
+	<script>
+	<name: 'How to use stream'>
+	Clipboard default clipboardText: '((ReadWriteStream with: '''') nextPutAll: ''YourText'' asString).'.
+	self inform: 'Copied to clipboard'
 ]
 
 { #category : #load }
