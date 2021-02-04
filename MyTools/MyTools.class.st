@@ -178,16 +178,17 @@ MyTools class >> loadMyPharoFork [
 	  privateKey: prvKeyFile.
 
 	branchName := 'Pharo9.0'.
-	remote := IceGitRemote url: 'https://github.com/dupriezt/pharo'.
+	remote := IceGitRemote name: 'origin' url: 'https://github.com/dupriezt/pharo'.
 	location := FileLocator localDirectory / 'iceberg' / remote projectName.
 	repo := IceRepositoryCreator new
 		remote: remote;
 		location: location;
-		createRepository.
+		cloneRepository.
 	self inform: 'Registering repository ...'.
 	repo register.
 	self inform: 'Checking out ...' , branchName.
-		repo checkoutBranch: branchName.
+	repo checkoutBranch: branchName.
+	repo addRemote: (IceGitRemote name: 'pharo-project' url: 'https://github.com/pharo-project/pharo.git').
 ]
 
 { #category : #load }
