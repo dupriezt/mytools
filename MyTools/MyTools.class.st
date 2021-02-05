@@ -189,6 +189,9 @@ MyTools class >> loadMyPharoFork [
 	self inform: 'Checking out ...' , branchName.
 	repo checkoutBranch: branchName.
 	repo addRemote: (IceGitRemote name: 'pharo-project' url: 'https://github.com/pharo-project/pharo.git').
+	(repo getConfigurationGlobal: false)
+		username: 'dupriezt';
+		email: 'dupriez+github@crans.org'.
 ]
 
 { #category : #load }
