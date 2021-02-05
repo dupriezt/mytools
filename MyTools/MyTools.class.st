@@ -225,7 +225,7 @@ MyTools class >> loadMyPack [
 MyTools class >> loadMyPharoFork [
 	<script>
 	<name: 'Load My Pharo Fork'>
-	(self loadGithubRepository: 'pharo' owner: 'dupriezt' branch: 'Pharo9.0' baseline: 'nil')
+	(self loadGithubRepository: 'pharo' owner: 'dupriezt' branch: 'Pharo9.0' baseline: nil)
 		addRemote: (IceGitRemote name: 'pharo-project' url: 'https://github.com/pharo-project/pharo.git')
 ]
 
