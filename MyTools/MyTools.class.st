@@ -73,6 +73,16 @@ MyTools class >> getInstructionsForVisualStudioCode [
 8) Drag and drop the iceberg repositories you want to edit onto Visual Studio code') inspect
 ]
 
+{ #category : #'as yet unclassified' }
+MyTools class >> gitEmail [
+	^ 'dupriez+github@crans.org'
+]
+
+{ #category : #'as yet unclassified' }
+MyTools class >> gitUsername [
+	^ 'dupriezt'
+]
+
 { #category : #help }
 MyTools class >> helpUseStream [
 	<script>
@@ -123,6 +133,49 @@ MyTools class >> loadEventGenerator [
 	
 ]
 
+{ #category : #'as yet unclassified' }
+MyTools class >> loadGithubRepository: repoName owner: repoOwner branch: branchName baseline: baseline [
+	"set @baseline to nil in order not to load any baseline"
+	| remote credentialStore location repo |
+	remote := IceGitRemote name: 'origin' url: 'https://github.com/', repoOwner, '/', repoName.
+	credentialStore := IceCredentialStore current.
+	(credentialStore plaintextCredentialForHostname: 'github.com')
+		username: self gitUsername;
+		password: (UIManager default requestPassword: 'Password for github.com');
+		storeInto: credentialStore forHostname: 'github.com'.
+	location := FileLocator localDirectory / 'iceberg' / remote projectName.
+	repo := IceRepositoryCreator new
+		remote: remote;
+		location: location;
+		cloneRepository.
+	self inform: 'Registering repository ...'.
+	repo register.
+	self inform: 'Checking out ...' , branchName.
+	repo checkoutBranch: branchName.
+	"Configure repo so that it does not ask for git name and email when commiting"
+	(repo getConfigurationGlobal: false)
+		username: self gitUsername;
+		email: self gitEmail.
+	"Loading the baseline of that repo"
+	baseline ifNotNil: [
+		Metacello new
+			baseline: baseline;
+			repository: 'github://', repoOwner, '/', repoName;
+			load.
+	].
+
+
+
+
+	"For ssh authentification, maybe some day it will be useful
+	pubKeyFile := '/Users/ishalya/.ssh/id_rsa.pub'.
+	prvKeyFile := '/Users/ishalya/.ssh/id_rsa'.
+	IceCredentialsProvider sshCredentials
+		publicKey: pubKeyFile;
+		privateKey: prvKeyFile;
+		username: 'dupriezt'."
+]
+
 { #category : #root }
 MyTools class >> loadGloVar [
 	<script>
@@ -147,10 +200,11 @@ MyTools class >> loadInformantNetwork [
 MyTools class >> loadInquisitor [
 	<script>
 	<name: 'Load Inquisitor'>
-	Metacello new
+	self loadGithubRepository: 'Inquisitor' owner: 'dupriezt'  branch: 'master' baseline: 'Inquisitor'
+	"Metacello new
     baseline: 'Inquisitor';
     repository: 'github://dupriezt/inquisitor';
-    load.
+    load."
 ]
 
 { #category : #load }
