@@ -135,7 +135,8 @@ MyTools class >> loadEventGenerator [
 
 { #category : #'as yet unclassified' }
 MyTools class >> loadGithubRepository: repoName owner: repoOwner branch: branchName baseline: baseline [
-	"set @baseline to nil in order not to load any baseline"
+	"set @baseline to nil in order not to load any baseline.
+	Return the iceberg repository object that was created"
 	| remote credentialStore location repo |
 	remote := IceGitRemote name: 'origin' url: 'https://github.com/', repoOwner, '/', repoName.
 	credentialStore := IceCredentialStore current.
@@ -163,6 +164,7 @@ MyTools class >> loadGithubRepository: repoName owner: repoOwner branch: branchN
 			repository: 'github://', repoOwner, '/', repoName;
 			load.
 	].
+	^ repo
 
 
 
@@ -223,29 +225,8 @@ MyTools class >> loadMyPack [
 MyTools class >> loadMyPharoFork [
 	<script>
 	<name: 'Load My Pharo Fork'>
-	| pubKeyFile prvKeyFile branchName remote location repo |
-	pubKeyFile := '/Users/ishalya/.ssh/id_rsa.pub'.
-	prvKeyFile := '/Users/ishalya/.ssh/id_rsa'.
-
-	IceCredentialsProvider sshCredentials
-	  publicKey: pubKeyFile;
-	  privateKey: prvKeyFile.
-
-	branchName := 'Pharo9.0'.
-	remote := IceGitRemote name: 'origin' url: 'https://github.com/dupriezt/pharo'.
-	location := FileLocator localDirectory / 'iceberg' / remote projectName.
-	repo := IceRepositoryCreator new
-		remote: remote;
-		location: location;
-		cloneRepository.
-	self inform: 'Registering repository ...'.
-	repo register.
-	self inform: 'Checking out ...' , branchName.
-	repo checkoutBranch: branchName.
-	repo addRemote: (IceGitRemote name: 'pharo-project' url: 'https://github.com/pharo-project/pharo.git').
-	(repo getConfigurationGlobal: false)
-		username: 'dupriezt';
-		email: 'dupriez+github@crans.org'.
+	(self loadGithubRepository: 'pharo' owner: 'dupriezt' branch: 'Pharo9.0' baseline: 'nil')
+		addRemote: (IceGitRemote name: 'pharo-project' url: 'https://github.com/pharo-project/pharo.git')
 ]
 
 { #category : #load }
