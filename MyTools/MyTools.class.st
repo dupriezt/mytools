@@ -87,7 +87,11 @@ MyTools class >> gitUsername [
 MyTools class >> helpUseStream [
 	<script>
 	<name: 'How to use stream'>
-	Clipboard default clipboardText: '((ReadWriteStream with: '''') nextPutAll: ''YourText'' asString).'.
+	Clipboard default clipboardText: 'str := (WriteStream on: String new)
+	nextPutAll: ''Hello''; cr;
+	nextPut: $#;
+	nextPutAll: ''World'';
+	contents'.
 	self inform: 'Copied to clipboard'
 ]
 
