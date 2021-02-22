@@ -20,7 +20,7 @@ ClyCopyMethodAsTextCommand >> execute [
 	methodAsMarkdownString := (WriteStream on: String new)
 		nextPut: $`;
 		nextPutAll: (method methodClass asString);
-		nextPutAll: '>>>#';
+		nextPutAll: '>>#';
 		nextPutAll: method selector;
 		nextPut: $`; cr;
 		nextPutAll: '```smalltalk'; cr;
