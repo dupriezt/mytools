@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 ClyInspectCompiledMethodCommand >> defaultMenuIconName [
-	^#glamorousBrowse
+	^#glamorousInspect
 ]
 
 { #category : #accessing }
